@@ -19,7 +19,7 @@ export function SectionHeading({ eyebrow, title, intro, tone = 'light', ornament
         <span className={`eyebrow ${tone === 'dark' ? 'text-gold-soft' : ''}`}>{eyebrow}</span>
       </Reveal>
       <Reveal variant="paper" delay={0.1}>
-        <h2 className={`text-[clamp(2.4rem,6vw,3.6rem)] font-medium leading-[1.05] ${tone === 'dark' ? 'text-ivory' : 'text-ink'}`}>{title}</h2>
+        <h2 className={`text-[clamp(1.9rem,5.5vw,3.6rem)] font-medium leading-[1.08] ${tone === 'dark' ? 'text-ivory' : 'text-ink'}`}>{title}</h2>
       </Reveal>
       {ornament && <Ornament tone={tone === 'dark' ? 'light' : 'gold'} />}
       {intro && (

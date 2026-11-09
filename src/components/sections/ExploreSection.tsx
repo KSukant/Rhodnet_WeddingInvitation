@@ -16,10 +16,29 @@ const ART: Record<Place['tone'], string> = {
 export function ExploreSection() {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
   const go = (d: number) => {
     setDir(d);
     setIndex((i) => (i + d + PLACES.length) % PLACES.length);
   };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+    if (distance > 45) {
+      go(1); // swipe left -> next
+    } else if (distance < -45) {
+      go(-1); // swipe right -> prev
+    }
+    setTouchStart(null);
+  };
+
   useEffect(() => {
     const id = window.setInterval(() => go(1), 7000);
     return () => window.clearInterval(id);
@@ -29,7 +48,12 @@ export function ExploreSection() {
   return (
     <Section id="explore" tone="paper">
       <SectionHeading eyebrow="While you are here" title="Places to Explore" intro="Discover handpicked places that capture the timeless charm of Kochi and the backwaters." />
-      <div className="relative w-full max-w-3xl" style={{ perspective: 1400 }}>
+      <div
+        className="relative w-full max-w-3xl select-none"
+        style={{ perspective: 1400 }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <AnimatePresence mode="wait" custom={dir}>
           <motion.article
             key={place.title}
@@ -40,7 +64,7 @@ export function ExploreSection() {
             exit={{ opacity: 0, rotateY: dir * -35, x: dir * -80 }}
             transition={{ duration: 0.6, ease: [0.3, 0.75, 0.25, 1] }}
           >
-            <div className="relative min-h-[220px] overflow-hidden bg-wine md:min-h-[320px]">
+            <div className="relative min-h-[200px] overflow-hidden bg-wine md:min-h-[320px]">
               {place.image ? (
                 <>
                   <img
@@ -54,11 +78,11 @@ export function ExploreSection() {
                 <div className="h-full w-full" style={{ background: ART[place.tone] }} />
               )}
             </div>
-            <div className="paper-grain flex flex-col gap-3 rounded-tl-[90px] bg-ivory p-7 text-left max-md:rounded-t-[40px]">
+            <div className="paper-grain flex flex-col gap-2.5 sm:gap-3 rounded-tl-[60px] sm:rounded-tl-[90px] bg-ivory p-5 sm:p-7 text-left max-md:rounded-t-[36px]">
               <span className="eyebrow">{place.eyebrow}</span>
-              <h3 className="text-3xl font-medium text-sage-deep">{place.title}</h3>
-              <p className="text-charcoal/75">{place.text}</p>
-              <ul className="list-disc pl-5 marker:text-gold">
+              <h3 className="text-2xl sm:text-3xl font-medium text-sage-deep">{place.title}</h3>
+              <p className="text-sm sm:text-base text-charcoal/75">{place.text}</p>
+              <ul className="list-disc pl-5 text-sm sm:text-base marker:text-gold space-y-1">
                 {place.highlights.map((h) => (
                   <li key={h}>{h}</li>
                 ))}
@@ -66,23 +90,28 @@ export function ExploreSection() {
             </div>
           </motion.article>
         </AnimatePresence>
-        <div className="mt-5 flex items-center gap-3">
+        <div className="mt-4 sm:mt-5 flex items-center justify-between gap-3">
           <div className="flex flex-1 gap-2">
             {PLACES.map((p, i) => (
               <span key={p.title} className={`h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-sage-deep' : 'w-1.5 bg-linen'}`} />
             ))}
           </div>
-          {(['left', 'right'] as const).map((d) => (
-            <button
-              key={d}
-              type="button"
-              aria-label={d === 'left' ? 'Previous place' : 'Next place'}
-              onClick={() => go(d === 'left' ? -1 : 1)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-ivory"
-            >
-              <ChevronIcon dir={d} className="h-4 w-4" />
-            </button>
-          ))}
+          <span className="text-[11px] font-sans tracking-widest text-charcoal/50 lg:hidden mr-1">
+            SWIPE TO EXPLORE
+          </span>
+          <div className="flex gap-2">
+            {(['left', 'right'] as const).map((d) => (
+              <button
+                key={d}
+                type="button"
+                aria-label={d === 'left' ? 'Previous place' : 'Next place'}
+                onClick={() => go(d === 'left' ? -1 : 1)}
+                className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-ivory transition-colors"
+              >
+                <ChevronIcon dir={d} className="h-4 w-4" />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </Section>

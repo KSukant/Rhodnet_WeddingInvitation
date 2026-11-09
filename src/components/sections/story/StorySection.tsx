@@ -28,19 +28,26 @@ export function StorySection() {
           <div className="absolute inset-0 bg-gradient-to-r from-night via-night/80 to-night/60" />
         </div>
 
-        <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-8 px-[max(20px,env(safe-area-inset-left))] pt-16 lg:grid-cols-[.9fr_1.1fr] lg:gap-16 lg:pt-0">
+        <div className="relative z-10 mx-auto flex flex-col justify-center h-full w-full max-w-6xl items-center gap-3 sm:gap-6 px-[max(16px,env(safe-area-inset-left))] pt-12 pb-6 lg:grid lg:grid-cols-[.9fr_1.1fr] lg:gap-16 lg:py-0">
+          {/* mobile chapter indicator pills */}
+          <div className="flex items-center gap-2.5 lg:hidden z-20">
+            {STORY.map((c, i) => (
+              <MobileNumeral key={c.numeral} label={c.numeral} index={i} active={activeIndex} />
+            ))}
+          </div>
+
           {/* arched photo window */}
-          <motion.div className="relative mx-auto aspect-[3/4] h-[min(70svh,620px)] max-lg:h-[44svh]" style={{ scale: frameScale }}>
-            <div className="absolute inset-0 overflow-hidden rounded-arch shadow-[0_0_0_6px_rgba(255,253,247,.9),0_0_0_7px_#D8C6A0,0_40px_80px_-30px_rgba(0,0,0,.8)]">
+          <motion.div className="relative mx-auto aspect-[3/4] h-[min(65svh,580px)] max-lg:h-[28svh] max-lg:max-h-[220px]" style={{ scale: frameScale }}>
+            <div className="absolute inset-0 overflow-hidden rounded-arch shadow-[0_0_0_5px_rgba(255,253,247,.9),0_0_0_6px_#D8C6A0,0_30px_60px_-25px_rgba(0,0,0,.8)]">
               {STORY.map((c, i) => (
                 <ChapterPhoto key={c.title} chapter={c} index={i} total={n} progress={scrollYProgress} />
               ))}
             </div>
-            <div className="pointer-events-none absolute -inset-3 rounded-[999px_999px_24px_24px] border border-gold-soft/40" />
+            <div className="pointer-events-none absolute -inset-2.5 rounded-[999px_999px_20px_20px] border border-gold-soft/40" />
           </motion.div>
 
           {/* words */}
-          <div className="relative flex gap-6 lg:gap-10">
+          <div className="relative flex w-full justify-center gap-6 lg:gap-10">
             {/* gold progress line with chapter numerals */}
             <div className="relative hidden w-8 shrink-0 flex-col items-center justify-between py-2 sm:flex" style={{ height: 'min(52svh, 420px)' }}>
               <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-ivory/15" />
@@ -49,7 +56,7 @@ export function StorySection() {
                 <Numeral key={c.numeral} label={c.numeral} index={i} active={activeIndex} />
               ))}
             </div>
-            <div className="relative h-[min(46svh,380px)] flex-1 max-lg:h-[30svh] max-lg:text-center">
+            <div className="relative h-[min(46svh,380px)] w-full flex-1 max-lg:h-[24svh] max-lg:max-h-[170px] max-lg:text-center">
               <div className="mb-2 hidden lg:block">
                 <span className="eyebrow text-gold-soft">Written by God, lived by us</span>
               </div>
@@ -82,6 +89,20 @@ function Numeral({ label, index, active }: { label: string; index: number; activ
     <motion.span
       className="relative grid h-8 w-8 place-items-center rounded-full border bg-night font-display text-sm"
       style={{ color, borderColor: color, scale }}
+    >
+      {label}
+    </motion.span>
+  );
+}
+
+function MobileNumeral({ label, index, active }: { label: string; index: number; active: MotionValue<number> }) {
+  const color = useTransform(active, (a) => (a >= index ? '#E6D3A3' : 'rgba(255,253,247,.4)'));
+  const bg = useTransform(active, (a) => (a === index ? 'rgba(230,211,163,.15)' : 'transparent'));
+  const scale = useTransform(active, (a) => (a === index ? 1.1 : 1));
+  return (
+    <motion.span
+      className="relative grid h-7 w-7 place-items-center rounded-full border font-display text-xs"
+      style={{ color, borderColor: color, backgroundColor: bg, scale }}
     >
       {label}
     </motion.span>

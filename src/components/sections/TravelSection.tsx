@@ -27,13 +27,13 @@ export function TravelSection() {
   return (
     <Section id="travel" tone="ivory">
       <SectionHeading eyebrow="Plan your journey" title="Travel Guide" intro="Your convenience is our priority. Kindly choose the option that suits you best." />
-      <div className="grid w-full items-start gap-6 text-left md:grid-cols-[220px_1fr]">
+      <div className="grid w-full items-start gap-6 text-left md:grid-cols-[200px_1fr] lg:grid-cols-[220px_1fr]">
         <Reveal variant="zoom" className="mx-auto">
-          <div className="grid aspect-square w-[200px] place-items-center rounded-full bg-[radial-gradient(circle_at_40%_30%,#6E8566,#3F5240)] text-center text-ivory shadow-[0_0_0_6px_#FFFDF7,0_0_0_7px_#D8C6A0]">
+          <div className="grid aspect-square w-[140px] sm:w-[170px] md:w-[200px] place-items-center rounded-full bg-[radial-gradient(circle_at_40%_30%,#6E8566,#3F5240)] text-center text-ivory shadow-[0_0_0_5px_#FFFDF7,0_0_0_6px_#D8C6A0]">
             <div>
-              <span className="block font-sans text-[9px] tracking-[0.3em] text-gold-soft">FINAL DESTINATION</span>
-              <span className="block text-[2.2rem]">{WEDDING.city}</span>
-              <span className="font-sans text-[9px] tracking-[0.2em] opacity-80">{WEDDING.state?.toUpperCase() ?? 'KERALA'}</span>
+              <span className="block font-sans text-[8px] sm:text-[9px] tracking-[0.3em] text-gold-soft">FINAL DESTINATION</span>
+              <span className="block text-[1.8rem] sm:text-[2.2rem]">{WEDDING.city}</span>
+              <span className="font-sans text-[8px] sm:text-[9px] tracking-[0.2em] opacity-80">{WEDDING.state?.toUpperCase() ?? 'KERALA'}</span>
             </div>
           </div>
         </Reveal>
@@ -50,8 +50,8 @@ export function TravelSection() {
                 <PlaneIcon className="h-4 w-4 rotate-90" />
               </motion.span>
               {TRAVEL.airports.map((a) => (
-                <span key={a} className="relative flex flex-col items-center gap-2 font-sans text-[11px] tracking-[0.14em]">
-                  <span className="h-3 w-3 rounded-full bg-gold shadow-[0_0_0_4px_#FFFDF7]" />
+                <span key={a} className="relative flex flex-col items-center gap-1.5 sm:gap-2 font-sans text-[9px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.14em] text-center">
+                  <span className="h-3 w-3 rounded-full bg-gold shadow-[0_0_0_3px_#FFFDF7]" />
                   {a}
                 </span>
               ))}
@@ -60,14 +60,14 @@ export function TravelSection() {
           <Reveal className={card} delay={0.1}>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <CardHead icon={<TrainIcon className="h-5 w-5" />} eyebrow={`BY TRAIN · ${TRAVEL.station ?? 'ERNAKULAM (ERS / ERN)'}`} title="Recommended Trains" />
-              <div className="mb-4 inline-flex rounded-full bg-linen p-1" role="tablist">
+              <div className="mb-3 sm:mb-4 inline-flex w-full sm:w-auto justify-center rounded-full bg-linen p-1" role="tablist">
                 {cities.map((c) => (
                   <button
                     key={c}
                     role="tab"
                     aria-selected={city === c}
                     onClick={() => setCity(c)}
-                    className={`relative rounded-full px-4 py-1.5 font-sans text-[10px] tracking-[0.16em] ${city === c ? 'text-ivory' : 'text-charcoal'}`}
+                    className={`relative flex-1 sm:flex-initial text-center rounded-full px-3 sm:px-4 py-2 font-sans text-[10px] tracking-[0.16em] min-h-[38px] flex items-center justify-center ${city === c ? 'text-ivory' : 'text-charcoal'}`}
                   >
                     {city === c && <motion.span layoutId="train-tab" className="absolute inset-0 rounded-full bg-sage-deep" />}
                     <span className="relative">{c}</span>

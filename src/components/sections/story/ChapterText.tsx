@@ -19,7 +19,7 @@ export function ChapterText({ chapter, index, total, progress }: ChapterTextProp
   const numeralY = useTransform(progress, [start - pad, end + pad], [120, -120]);
 
   return (
-    <motion.div className="absolute inset-0 flex flex-col justify-center gap-4" style={{ opacity, y, filter: blur }}>
+    <motion.div className="absolute inset-0 flex flex-col justify-center gap-2 sm:gap-3.5 max-lg:items-center" style={{ opacity, y, filter: blur }}>
       <motion.span
         aria-hidden="true"
         className="pointer-events-none absolute -top-6 right-0 font-display text-[clamp(8rem,18vw,14rem)] leading-none text-gold/10 max-lg:hidden"
@@ -27,12 +27,12 @@ export function ChapterText({ chapter, index, total, progress }: ChapterTextProp
       >
         {chapter.numeral}
       </motion.span>
-      <span className="eyebrow text-gold-soft">
+      <span className="eyebrow text-gold-soft text-[10px] sm:text-[11px]">
         Chapter {chapter.numeral} · {chapter.eyebrow}
       </span>
-      <h3 className="text-[clamp(2.2rem,4.6vw,3.6rem)] font-medium leading-[1.05] text-ivory">{chapter.title}</h3>
-      <span className="h-px w-24 bg-gradient-to-r from-champagne to-transparent" />
-      <p className="max-w-[34ch] text-[1.12rem] italic leading-relaxed text-linen/85">{chapter.text}</p>
+      <h3 className="text-[clamp(1.5rem,4.2vw,3.6rem)] font-medium leading-[1.1] text-ivory">{chapter.title}</h3>
+      <span className="h-px w-20 sm:w-24 bg-gradient-to-r from-transparent via-champagne to-transparent lg:from-champagne lg:via-champagne/60" />
+      <p className="max-w-[34ch] text-[0.92rem] sm:text-[1.12rem] italic leading-relaxed text-linen/85">{chapter.text}</p>
     </motion.div>
   );
 }

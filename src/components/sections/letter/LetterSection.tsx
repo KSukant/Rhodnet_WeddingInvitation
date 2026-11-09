@@ -11,7 +11,7 @@ import { LETTER, WEDDING } from '../../../data/wedding';
 /** SECTION 03 · A letter to family and friends on a parchment scroll that unrolls. */
 export function LetterSection() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const open = useInView(ref, { once: true, amount: 0.45 });
+  const open = useInView(ref, { once: true, amount: 0.2 });
   const textStart = SCROLL_T.unroll + 0.4;
   const lines = [LETTER.salutation, ...LETTER.paragraphs, LETTER.signOff];
   const signAt = textStart + lines.length * 0.35 + 0.2;

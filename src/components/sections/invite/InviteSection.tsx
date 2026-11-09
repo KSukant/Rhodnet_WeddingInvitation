@@ -90,27 +90,27 @@ export function InviteSection({ onOpen, onReveal, onComplete }: InviteSectionPro
         <Bouquet size="small" className="w-full" />
       </motion.div>
 
-      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center gap-[clamp(14px,2.6vh,26px)] px-4 py-6 text-center">
+      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] px-4 py-4 sm:py-6 text-center">
         <motion.header
-          className="flex flex-col items-center gap-1.5"
+          className="flex flex-col items-center gap-1 sm:gap-1.5"
           animate={cleared ? { opacity: 0, y: -16 } : { opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <motion.span className="font-sans text-[10px] font-medium uppercase tracking-[0.26em] text-gold sm:text-[11px] sm:tracking-[0.34em]" {...up(INTRO.eyebrow)}>
+          <motion.span className="font-sans text-[10px] font-medium uppercase tracking-[0.24em] text-gold sm:text-[11px] sm:tracking-[0.34em]" {...up(INTRO.eyebrow)}>
             With joyful hearts and God&rsquo;s blessings
           </motion.span>
-          <motion.h1 className="text-[clamp(1.9rem,4.4vw,2.7rem)] font-normal text-charcoal" {...up(INTRO.title)}>
+          <motion.h1 className="text-[clamp(1.6rem,4.4vw,2.7rem)] font-normal text-charcoal leading-tight" {...up(INTRO.title)}>
             You Are Cordially Invited
           </motion.h1>
-          <motion.span className="font-sans text-[10px] tracking-[0.32em] text-charcoal/70" {...up(INTRO.sub)}>
+          <motion.span className="font-sans text-[9px] sm:text-[10px] tracking-[0.28em] sm:tracking-[0.32em] text-charcoal/70" {...up(INTRO.sub)}>
             TO CELEBRATE A BEAUTIFUL BEGINNING
           </motion.span>
-          <motion.p className="mt-2 font-script text-[clamp(2.3rem,5.4vw,3.5rem)] leading-[1.15] text-charcoal" {...up(INTRO.names)}>
+          <motion.p className="mt-1 sm:mt-2 font-script text-[clamp(2.1rem,5.4vw,3.5rem)] leading-[1.1] text-charcoal" {...up(INTRO.names)}>
             {WEDDING.groom}
             <i className="mx-[.25em] font-display text-[.62em] text-gold">&amp;</i>
             {WEDDING.bride}
           </motion.p>
-          <motion.span className="font-sans text-xs tracking-[0.42em] text-gold" {...up(INTRO.date)}>
+          <motion.span className="font-sans text-[11px] sm:text-xs tracking-[0.36em] sm:tracking-[0.42em] text-gold" {...up(INTRO.date)}>
             {formatDateLong(WEDDING.wedding)}
           </motion.span>
         </motion.header>

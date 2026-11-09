@@ -55,40 +55,45 @@ export function HeroSection({ play, onExplore }: HeroSectionProps) {
       />
       {play && <GoldDust />}
 
-      <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-6xl items-center gap-8 px-[max(20px,env(safe-area-inset-left))] pb-20 pt-16 -translate-y-3 sm:-translate-y-4 lg:grid-cols-[1.05fr_.95fr] lg:gap-6 lg:pb-16 lg:pt-14 lg:-translate-y-6">
+      <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-6xl items-center gap-6 px-[max(16px,env(safe-area-inset-left))] pb-16 pt-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-8 lg:pb-16 lg:pt-14">
         {/* text column */}
-        <motion.div style={{ x: textX }} className="order-2 flex flex-col items-center gap-2.5 text-center lg:order-1 lg:items-start lg:text-left">
-          <motion.span className="font-sans text-[11px] font-semibold tracking-[0.34em] text-[#E6D7B4] text-shadow-soft sm:text-xs" {...fadeUp(play, T.label)}>
+        <motion.div style={{ x: textX }} className="flex flex-col items-center gap-2 sm:gap-2.5 text-center lg:items-start lg:text-left">
+          <motion.span className="font-sans text-[10px] sm:text-[11px] font-semibold tracking-[0.32em] sm:tracking-[0.34em] text-[#E6D7B4] text-shadow-soft" {...fadeUp(play, T.label)}>
             TOGETHER WITH THEIR FAMILIES
           </motion.span>
           <motion.h2 className="flex flex-col font-normal leading-tight" {...fadeUp(play, T.title)}>
-            <span className="text-[clamp(1rem,1.8vw,1.3rem)] tracking-[0.32em] text-ivory/90">THE BEGINNING OF</span>
-            <span className="text-[clamp(2.3rem,4vw,3rem)] italic">Forever</span>
+            <span className="text-[clamp(0.92rem,1.8vw,1.3rem)] tracking-[0.32em] text-ivory/90">THE BEGINNING OF</span>
+            <span className="text-[clamp(2.1rem,4vw,3rem)] italic">Forever</span>
           </motion.h2>
 
           <div className="flex flex-col items-center lg:items-start">
-            <InkText text={WEDDING.groom} play={play} delay={T.groom} className="h-[clamp(60px,7.8vw,104px)] w-auto max-w-[88vw]" />
+            <InkText text={WEDDING.groom} play={play} delay={T.groom} className="h-[clamp(52px,7.8vw,104px)] w-auto max-w-[88vw]" />
             <motion.span
-              className="-my-2 font-display text-[2.4rem] italic text-champagne lg:ml-[2.2em]"
+              className="-my-2 font-display text-[2.2rem] italic text-champagne lg:ml-[2.2em]"
               initial={{ opacity: 0, scale: 0.4, rotate: -30 }}
               animate={play ? { opacity: 1, scale: 1, rotate: 0 } : undefined}
               transition={{ type: 'spring', stiffness: 160, damping: 10, delay: T.amp }}
             >
               &amp;
             </motion.span>
-            <InkText text={WEDDING.bride} play={play} delay={T.bride} className="h-[clamp(60px,7.8vw,104px)] w-auto max-w-[88vw]" />
+            <InkText text={WEDDING.bride} play={play} delay={T.bride} className="h-[clamp(52px,7.8vw,104px)] w-auto max-w-[88vw]" />
           </div>
 
-          <motion.div className="flex flex-col items-center gap-1 text-center lg:items-start lg:text-left" {...fadeUp(play, T.date)}>
-            <span className="font-sans text-[13px] font-medium tracking-[0.42em] text-ivory">
+          {/* mobile photo arch: naturally nested in mobile flow */}
+          <div className="my-1.5 flex justify-center lg:hidden">
+            <HeroPhotoCard photo={PHOTOS.heroPortrait} play={play} px={x} py={y} />
+          </div>
+
+          <motion.div className="flex flex-col items-center gap-0.5 sm:gap-1 text-center lg:items-start lg:text-left" {...fadeUp(play, T.date)}>
+            <span className="font-sans text-[12px] sm:text-[13px] font-medium tracking-[0.36em] sm:tracking-[0.42em] text-ivory">
               {formatDateDots(WEDDING.wedding)}
             </span>
-            <span className="font-sans text-[12px] font-medium tracking-[0.34em] text-champagne">
+            <span className="font-sans text-[11px] sm:text-[12px] font-medium tracking-[0.32em] sm:tracking-[0.34em] text-champagne">
               {WEDDING.weddingTime ?? '8:45 AM'}
             </span>
           </motion.div>
           <motion.span
-            className="h-px w-40 bg-gradient-to-r from-transparent via-champagne to-transparent lg:from-champagne lg:via-champagne/60"
+            className="h-px w-36 sm:w-40 bg-gradient-to-r from-transparent via-champagne to-transparent lg:from-champagne lg:via-champagne/60"
             style={{ originX: 0 }}
             initial={{ scaleX: 0 }}
             animate={play ? { scaleX: 1 } : undefined}
@@ -99,31 +104,31 @@ export function HeroSection({ play, onExplore }: HeroSectionProps) {
               href={WEDDING.churchMap}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[1.05rem] tracking-[0.3em] text-ivory/90 transition-colors hover:text-champagne"
+              className="text-[0.95rem] sm:text-[1.05rem] tracking-[0.24em] sm:tracking-[0.3em] text-ivory/90 transition-colors hover:text-champagne px-2"
               {...fadeUp(play, T.church)}
             >
               {WEDDING.church.toUpperCase()}
             </motion.a>
           ) : (
-            <motion.span className="text-[1.05rem] tracking-[0.3em] text-ivory/90" {...fadeUp(play, T.church)}>
+            <motion.span className="text-[0.95rem] sm:text-[1.05rem] tracking-[0.24em] sm:tracking-[0.3em] text-ivory/90 px-2" {...fadeUp(play, T.church)}>
               {WEDDING.church.toUpperCase()}
             </motion.span>
           )}
           <motion.span
-            className="rounded-full border border-champagne/60 px-4 py-1.5 font-sans text-[10px] tracking-[0.4em] text-champagne"
+            className="rounded-full border border-champagne/60 px-3.5 py-1 sm:px-4 sm:py-1.5 font-sans text-[9px] sm:text-[10px] tracking-[0.36em] sm:tracking-[0.4em] text-champagne"
             initial={{ opacity: 0, scale: 0.7 }}
             animate={play ? { opacity: 1, scale: [0.7, 1.08, 1] } : undefined}
             transition={{ duration: 0.7, delay: T.save }}
           >
             SAVE THE DATE
           </motion.span>
-          <div className="mt-1 sm:mt-2">
+          <div className="mt-1">
             <Countdown target={WEDDING.wedding} play={play} delay={T.count} />
           </div>
         </motion.div>
 
-        {/* photo column */}
-        <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
+        {/* photo column on desktop */}
+        <div className="hidden justify-center lg:flex lg:justify-end">
           <HeroPhotoCard photo={PHOTOS.heroPortrait} play={play} px={x} py={y} />
         </div>
       </div>

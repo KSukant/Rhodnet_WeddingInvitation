@@ -22,7 +22,7 @@ export function HeroPhotoCard({ photo, play, px, py }: HeroPhotoCardProps) {
   return (
     <motion.div style={{ rotateX, rotateY, transformPerspective: 1200 }} className="relative">
       <motion.div
-        className="relative aspect-[3/4] h-[min(64svh,570px)] max-h-[570px] max-w-[86vw] overflow-hidden bg-[#FFFEFA] max-lg:h-[38svh]"
+        className="relative aspect-[3/4] h-[min(64svh,570px)] max-h-[570px] max-w-[86vw] overflow-hidden bg-[#FFFEFA] max-lg:h-[26svh] max-lg:max-h-[220px]"
         initial={{ scale: 0.55, y: 40, rotate: -4, opacity: 0, borderRadius: '6px 6px 6px 6px' }}
         animate={
           play
